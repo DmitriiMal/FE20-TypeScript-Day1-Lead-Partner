@@ -1,4 +1,10 @@
 "use strict";
+allergens.forEach((allergen) => {
+    let allergenList = document.querySelector(".allergens");
+    allergenList.innerHTML += `
+    <p class="list-group-item">${allergen}</p>
+    `;
+});
 //current object formatter
 const currencyFormater = new Intl.NumberFormat("de-AT", {
     style: "currency",
