@@ -1,4 +1,4 @@
-let products: any = [
+let soups: any = [
     {
         name: "the green one",
         image: "https://cdn.pixabay.com/photo/2014/12/16/23/45/soup-570922_1280.jpg",

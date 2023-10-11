@@ -1,5 +1,5 @@
 "use strict";
-let products = [
+let soups = [
     {
         name: "the green one",
         image: "https://cdn.pixabay.com/photo/2014/12/16/23/45/soup-570922_1280.jpg",

@@ -7,7 +7,7 @@ const currencyFormater = new Intl.NumberFormat("de-AT", {
 //select the products row and add items dynamically
 let productsRow = document.querySelector(".products") as HTMLElement;
    
-for (let product of products) {
+for (let product of soups) {
     productsRow.innerHTML += `
         <div class="card product col my-4 mx-2 myShadow" style="width: 300px;">
             <img class="card-img-top mt-2 px-3" src="${product.image}" alt="${product.name}">
@@ -26,7 +26,7 @@ const addToCartBtn = document.querySelectorAll(".product-button");
 //add event to add to cart buttons
 addToCartBtn.forEach((btn, i) => {
     btn.addEventListener( "click" , () => {
-        addToCart(products[i]);
+        addToCart(soups[i]);
     });
 });
 
