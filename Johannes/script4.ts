@@ -7,7 +7,7 @@ const currencyFormater = new Intl.NumberFormat("de-AT", {
 //select the products row and add items dynamically
 let productsRow = document.querySelector(".products") as HTMLElement;
    
-for (let  product of products) {
+for (let product of products) {
     productsRow.innerHTML += `
         <div class="card product col my-4 mx-2 myShadow" style="width: 300px;">
             <img class="card-img-top mt-2 px-3" src="${product.image}" alt="${product.name}">
@@ -22,7 +22,7 @@ for (let  product of products) {
 }
 
 //product button selected
-const addToCartBtn = document.querySelectorAll( ".product-button");
+const addToCartBtn = document.querySelectorAll(".product-button");
 
 //add event to add to cart buttons
 addToCartBtn.forEach((btn, i) => {
@@ -34,7 +34,7 @@ addToCartBtn.forEach((btn, i) => {
 //cart declared
 const cart: any[] = [];
 
-const addToCart: any = (product: any) => {
+const addToCart = (product: any) => {
     if (cart.find((val) => val.name == product.name)) {
         // console.log(cart.find((val) => val.name == product.name));
         product.qtty++;
@@ -74,6 +74,27 @@ const createRows = () => {
     }
     let cartItems = document.querySelector(".cart-items" ) as HTMLElement;
     cartItems.innerHTML = result;
+
+    const plusBtns = document.querySelectorAll(".plus");
+    plusBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            plusQtty(i);
+        });
+    });
+
+    const minusBtns = document.querySelectorAll(".minus");
+    minusBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            minusQtty(i);
+        });
+    });
+
+    const deleteBtns = document .querySelectorAll(".del");
+    deleteBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            deleteItem(i);
+        });
+    });
 }
 
 //updates the cart total amount
@@ -84,4 +105,30 @@ const cartTotal = () => {
     }
     const totalNumber = document.getElementById("price") as HTMLElement;
     totalNumber.innerHTML = currencyFormater.format(total);
+};
+
+//increases item quantity
+const plusQtty = (index: any) => {
+    cart[index].qtty++;
+    createRows();
+    cartTotal();
+};
+
+//decreases item quantity
+const minusQtty = (index: any) => {
+    if (cart[index].qtty == 1) {
+        cart.splice(index, 1);
+    } else {
+        cart[index].qtty--;
+    }
+    createRows();
+    cartTotal();
+};
+
+//deletes item from cart
+const deleteItem = (index: any) => {
+    cart[index].qtty = 1;
+    cart.splice(index, 1);
+    createRows();
+    cartTotal();
 };

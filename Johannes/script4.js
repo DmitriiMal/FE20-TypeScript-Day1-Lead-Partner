@@ -69,6 +69,24 @@ const createRows = () => {
     }
     let cartItems = document.querySelector(".cart-items");
     cartItems.innerHTML = result;
+    const plusBtns = document.querySelectorAll(".plus");
+    plusBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            plusQtty(i);
+        });
+    });
+    const minusBtns = document.querySelectorAll(".minus");
+    minusBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            minusQtty(i);
+        });
+    });
+    const deleteBtns = document.querySelectorAll(".del");
+    deleteBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            deleteItem(i);
+        });
+    });
 };
 //updates the cart total amount
 const cartTotal = () => {
@@ -78,4 +96,28 @@ const cartTotal = () => {
     }
     const totalNumber = document.getElementById("price");
     totalNumber.innerHTML = currencyFormater.format(total);
+};
+//increases item quantity
+const plusQtty = (index) => {
+    cart[index].qtty++;
+    createRows();
+    cartTotal();
+};
+//decreases item quantity
+const minusQtty = (index) => {
+    if (cart[index].qtty == 1) {
+        cart.splice(index, 1);
+    }
+    else {
+        cart[index].qtty--;
+    }
+    createRows();
+    cartTotal();
+};
+//deletes item from cart
+const deleteItem = (index) => {
+    cart[index].qtty = 1;
+    cart.splice(index, 1);
+    createRows();
+    cartTotal();
 };
