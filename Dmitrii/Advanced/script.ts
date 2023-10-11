@@ -1,8 +1,5 @@
-let text: string = 'Hello world!';
-console.table(menu);
-
 //current object formatter
-const currencyFormater = new Intl.NumberFormat('de-AT', {
+const currencyFormat: any = new Intl.NumberFormat('de-AT', {
   style: 'currency',
   currency: 'EUR',
 });
@@ -27,7 +24,7 @@ for (let product of menu) {
                 <a href="#" class="pro-title">${product.name}</a>
               </h4>
               <p>${product.description}</p>
-              <p class="price">${currencyFormater.format(product.price)}</p>
+              <p class="price">${currencyFormat.format(product.price)}</p>
             </div>
           </section>
         </div>
@@ -36,7 +33,133 @@ for (let product of menu) {
 }
 
 //product button selected
-const addToCartBtn: = document.querySelectorAll('.adtocart') as HTMLElement;
+const addToCartBtn: any = document.querySelectorAll('.adtocart');
 
 //cart declared
-const cart: any = [];
+const cart: any[] = [];
+
+//adds product to cart
+const addToCart = (product: any) => {
+  if (cart.find((val) => val.name == product.name)) {
+    // console.log(cart.find((val) => val.name == product.name));
+    product.quantity++;
+  } else {
+    cart.push(product);
+  }
+  console.table(cart);
+  createRows();
+  cartTotal();
+};
+
+//add event to add to cart buttons
+addToCartBtn.forEach((btn: any, i: any) => {
+  btn.addEventListener('click', () => {
+    addToCart(menu[i]);
+    // console.table(cart);
+  });
+});
+
+const createRows = () => {
+  let result: string = '';
+  for (let item of cart) {
+    result += `
+        <div class="panel-body my-cart shadow">
+          <img
+            src="${item.img}"
+            alt="${item.name}" />
+          <h5>${item.name}</h5>
+          <button class="btn plus"><i class="fa-solid fa-plus"></i></button>
+          <p>${item.quantity}</p>
+          <button class="btn minus"><i class="fa-solid fa-minus"></i></button>
+          <button class="btn del"><i class="fa-solid fa-trash"></i></button>
+          <p class="price">${currencyFormat.format(item.price)}</p>
+        </div>
+    `;
+  }
+  let cartRow = document.querySelector('.cart') as HTMLElement;
+  cartRow.innerHTML = result;
+
+  const plusBtns = document.querySelectorAll('.plus');
+  const minusBtns = document.querySelectorAll('.minus');
+  const deleteBtns = document.querySelectorAll('.del');
+
+  plusBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      plusQtty(i);
+    });
+  });
+
+  minusBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      minusQtty(i);
+    });
+  });
+
+  deleteBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      deleteItem(i);
+    });
+  });
+};
+
+//updates the cart total amount
+const cartTotal = () => {
+  let amound: number = 0;
+  let priceSum: number = 0;
+  let discount: number = 10;
+  let total: number = 0;
+  for (const item of cart) {
+    priceSum += item.price * item.quantity;
+  }
+  cart.forEach((product) => {
+    amound += product.quantity;
+  });
+
+  let result = document.getElementById('cart-price') as HTMLElement;
+
+  if (amound == 0) {
+    result.innerHTML = `
+    <h3 class="text-center">Your cart is empty  <i class="fa-solid fa-wind"></i></h3>
+  `;
+  } else if (priceSum >= 100) {
+    total = priceSum - (priceSum * discount) / 100;
+    result.innerHTML = `
+  <p class="text-right">You have ${amound} items in your cart</p>
+  <p class="text-right">Price: ${currencyFormat.format(priceSum)}</p>
+  <p class="text-right discount">Discount: ${discount}&percnt;</p>
+  <h3 class="text-right">Total: ${currencyFormat.format(total)}</h3>
+  `;
+  } else {
+    result.innerHTML = `
+  <p class="text-right">You have ${amound} items in your cart</p>
+  <h3 class="text-right">Total: ${currencyFormat.format(priceSum)}</h3>
+  <p class="text-right discount">Order over &euro; 100 and get your discount 10&percnt;!</p>
+  `;
+  }
+};
+
+//increases item quantity
+const plusQtty = (index: any) => {
+  cart[index].quantity++;
+  createRows();
+  cartTotal();
+};
+
+//decreases item quantity
+const minusQtty = (index: any) => {
+  if (cart[index].quantity == 1) {
+    cart.splice(index, 1);
+  } else {
+    cart[index].quantity--;
+  }
+  createRows();
+  cartTotal();
+};
+
+//deletes item from cart
+const deleteItem = (index: any) => {
+  cart[index].quantity = 1;
+  cart.splice(index, 1);
+  createRows();
+  cartTotal();
+};
