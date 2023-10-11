@@ -43,6 +43,7 @@ const addToCart: any = (product: any) => {
     }
     console.table(cart);
     createRows();
+    cartTotal();
 };
 
 const createRows = () => {
@@ -74,3 +75,13 @@ const createRows = () => {
     let cartItems = document.querySelector(".cart-items" ) as HTMLElement;
     cartItems.innerHTML = result;
 }
+
+//updates the cart total amount
+const cartTotal = () => {
+    let total: number = 0;
+    for (let item of cart) {
+      total += item.price * item.qtty;
+    }
+    const totalNumber = document.getElementById("price") as HTMLElement;
+    totalNumber.innerHTML = currencyFormater.format(total);
+};
