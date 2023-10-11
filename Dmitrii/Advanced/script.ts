@@ -1,5 +1,5 @@
 //current object formatter
-const currencyFormat: any = new Intl.NumberFormat('de-AT', {
+let currencyFormat: any = new Intl.NumberFormat('de-AT', {
   style: 'currency',
   currency: 'EUR',
 });
@@ -33,26 +33,42 @@ for (let product of menu) {
 }
 
 //product button selected
-const addToCartBtn: any = document.querySelectorAll('.adtocart');
+const addToCartBtn: NodeListOf<Element> =
+  document.querySelectorAll('.adtocart');
 
 //cart declared
-const cart: any[] = [];
+const cart: Array<{
+  name: string;
+  description: string;
+  price: number;
+  img: string;
+  quantity: number;
+}> = [];
 
 //adds product to cart
-const addToCart = (product: any) => {
+const addToCart = (product: {
+  name: string;
+  description: string;
+  price: number;
+  img: string;
+  quantity: number;
+}) => {
   if (cart.find((val) => val.name == product.name)) {
     // console.log(cart.find((val) => val.name == product.name));
-    product.quantity++;
+    cart.map((item) =>
+      item.name == product.name ? { ...item, quantity: item.quantity++ } : item
+    );
   } else {
-    cart.push(product);
+    cart.push({ ...product, quantity: 1 });
   }
   console.table(cart);
+  console.table(menu);
   createRows();
   cartTotal();
 };
 
 //add event to add to cart buttons
-addToCartBtn.forEach((btn: any, i: any) => {
+addToCartBtn.forEach((btn: Element, i: number) => {
   btn.addEventListener('click', () => {
     addToCart(menu[i]);
     // console.table(cart);
@@ -139,14 +155,14 @@ const cartTotal = () => {
 };
 
 //increases item quantity
-const plusQtty = (index: any) => {
+const plusQtty = (index: number) => {
   cart[index].quantity++;
   createRows();
   cartTotal();
 };
 
 //decreases item quantity
-const minusQtty = (index: any) => {
+const minusQtty = (index: number) => {
   if (cart[index].quantity == 1) {
     cart.splice(index, 1);
   } else {
@@ -157,9 +173,27 @@ const minusQtty = (index: any) => {
 };
 
 //deletes item from cart
-const deleteItem = (index: any) => {
+const deleteItem = (index: number) => {
   cart[index].quantity = 1;
   cart.splice(index, 1);
   createRows();
   cartTotal();
 };
+
+// object arrays class
+
+// string number boolean null
+
+let car = {
+  color: 'red',
+};
+
+let newCar = { ...car };
+
+car.color = 'blue';
+
+let a = 12;
+
+let b = a;
+
+a = 13;

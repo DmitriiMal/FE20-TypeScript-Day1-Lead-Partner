@@ -1,6 +1,6 @@
 "use strict";
 //current object formatter
-const currencyFormat = new Intl.NumberFormat('de-AT', {
+let currencyFormat = new Intl.NumberFormat('de-AT', {
     style: 'currency',
     currency: 'EUR',
 });
@@ -38,12 +38,13 @@ const cart = [];
 const addToCart = (product) => {
     if (cart.find((val) => val.name == product.name)) {
         // console.log(cart.find((val) => val.name == product.name));
-        product.quantity++;
+        cart.map((item) => item.name == product.name ? Object.assign(Object.assign({}, item), { quantity: item.quantity++ }) : item);
     }
     else {
-        cart.push(product);
+        cart.push(Object.assign(Object.assign({}, product), { quantity: 1 }));
     }
     console.table(cart);
+    console.table(menu);
     createRows();
     cartTotal();
 };
