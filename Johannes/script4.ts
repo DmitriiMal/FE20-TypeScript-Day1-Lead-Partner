@@ -38,9 +38,19 @@ addToCartBtn.forEach((btn, i) => {
 });
 
 //cart declared
-const cart: any[] = [];
+const cart: Array<{
+    name: string,
+    image: string,
+    price: number,
+    qtty: number
+}> = [];
 
-const addToCart = (product: any) => {
+const addToCart = (product: {
+    name: string,
+    image: string,
+    price: number,
+    qtty: number
+    }) => {
     if (cart.find((val) => val.name == product.name)) {
         // console.log(cart.find((val) => val.name == product.name));
         product.qtty++;
