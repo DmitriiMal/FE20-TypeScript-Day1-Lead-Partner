@@ -18,3 +18,8 @@ i {
 .myShadow {
     box-shadow: 0 0 12px gray;
 }
+
+.myCartItems {
+    border-radius: 5px;
+    box-shadow: 0 0 12px gray;
+}
