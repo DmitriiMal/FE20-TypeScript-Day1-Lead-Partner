@@ -48,3 +48,20 @@ let soups: any = [
         qtty: 1
     }
 ]
+
+const allergens: string[] = [
+    "Cereals containing gluten",
+    "Crustaceans",
+    "Eggs",
+    "Fish",
+    "Peanuts",
+    "Soybeans",
+    "Milk",
+    "Nuts",
+    "Celery",
+    "Mustard",
+    "Sesame seeds",
+    "Sulphur dioxide and sulphites",
+    "Lupin", 
+    "Molluscs"
+]
