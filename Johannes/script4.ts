@@ -107,14 +107,14 @@ const cartTotal = () => {
 };
 
 //increases item quantity
-const plusQtty = (index: any) => {
+const plusQtty = (index: number) => {
     cart[index].qtty++;
     createRows();
     cartTotal();
 };
 
 //decreases item quantity
-const minusQtty = (index: any) => {
+const minusQtty = (index: number) => {
     if (cart[index].qtty == 1) {
         cart.splice(index, 1);
     } else {
@@ -125,7 +125,7 @@ const minusQtty = (index: any) => {
 };
 
 //deletes item from cart
-const deleteItem = (index: any) => {
+const deleteItem = (index: number) => {
     cart[index].qtty = 1;
     cart.splice(index, 1);
     createRows();
