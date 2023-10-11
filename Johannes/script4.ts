@@ -92,21 +92,21 @@ const createRows = () => {
     cartItems.innerHTML = result;
 
     const plusBtns = document.querySelectorAll(".plus");
-    plusBtns.forEach((btn, i) => {
+    plusBtns.forEach((btn: Element, i: number) => {
         btn.addEventListener("click", () => {
             plusQtty(i);
         });
     });
 
     const minusBtns = document.querySelectorAll(".minus");
-    minusBtns.forEach((btn, i) => {
+    minusBtns.forEach((btn: Element, i: number) => {
         btn.addEventListener("click", () => {
             minusQtty(i);
         });
     });
 
     const deleteBtns = document .querySelectorAll(".del");
-    deleteBtns.forEach((btn, i) => {
+    deleteBtns.forEach((btn: Element, i: number) => {
         btn.addEventListener("click", () => {
             deleteItem(i);
         });
