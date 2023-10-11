@@ -14,3 +14,7 @@
 i {
     font-size: 25px;
 }
+
+.myShadow {
+    box-shadow: 0 0 12px gray;
+}

@@ -8,7 +8,7 @@ const currencyFormater = new Intl.NumberFormat("de-AT", {
 let productsRow = document.querySelector(".products");
 for (let product of products) {
     productsRow.innerHTML += `
-        <div class="card product col my-4" style="width: 300px;">
+        <div class="card product col my-4 mx-2 myShadow" style="width: 300px;">
             <img class="card-img-top mt-2 px-3" src="${product.image}" alt="${product.name}">
             <div class="card-body px-3 py-0">
                 <h5 class="card-title">${product.name}</h5>
