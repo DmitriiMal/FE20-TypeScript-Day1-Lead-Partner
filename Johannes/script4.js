@@ -36,7 +36,7 @@ const addToCart = (product) => {
     else {
         cart.push(product);
     }
-    console.table(cart);
+    // console.table(cart);
     createRows();
     cartTotal();
 };

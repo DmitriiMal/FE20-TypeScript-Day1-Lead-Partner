@@ -40,7 +40,7 @@ const addToCart = (product: any) => {
     } else {
         cart.push(product);
     }
-    console.table(cart);
+    // console.table(cart);
     createRows();
     cartTotal();
 };
