@@ -152,3 +152,13 @@ const deleteItem = (index) => {
     createRows();
     cartTotal();
 };
+// object arrays class
+// string number boolean null
+let car = {
+    color: 'red',
+};
+let newCar = Object.assign({}, car);
+car.color = 'blue';
+let a = 12;
+let b = a;
+a = 13;
