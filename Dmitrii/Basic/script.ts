@@ -81,3 +81,34 @@ setTimeout(() => {
 // ////////////////// //
 // /// Basic Ex 3 /// //
 // ////////////////// //
+
+let names: string[] = [
+  'Olivia',
+  'Ethan',
+  'Isabella',
+  'Mason',
+  'Sophia',
+  'Liam',
+  'Ava',
+  'Noah',
+  'Mia',
+  'Aiden',
+];
+
+//1
+let ex31 = document.getElementById('ex3-1') as HTMLElement;
+names.forEach((val, i) => {
+  ex31.innerHTML += `<p>${i}</p>`;
+});
+
+//2
+let ex32 = document.getElementById('ex3-2') as HTMLElement;
+names.forEach((val, i) => {
+  ex32.innerHTML += `<p>${val}</p>`;
+});
+
+//2
+let ex33 = document.getElementById('ex3-3') as HTMLElement;
+names.forEach((val, i) => {
+  ex33.innerHTML += `<p>Index of ${val} ${i}is </p>`;
+});
