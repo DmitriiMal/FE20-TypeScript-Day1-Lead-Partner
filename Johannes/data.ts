@@ -1,4 +1,9 @@
-let soups: any = [
+let soups: Array<{
+    name: string,
+    image: string,
+    price: number,
+    qtty: number
+    }> = [
     {
         name: "the green one",
         image: "https://cdn.pixabay.com/photo/2014/12/16/23/45/soup-570922_1280.jpg",
